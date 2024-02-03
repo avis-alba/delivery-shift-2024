@@ -1,0 +1,20 @@
+.menu {
+	height: 30px;
+	padding: 10px;
+	background-color: #fff;
+}
+
+@media screen and (min-width: 1000px) {
+	.menu {
+		height: 40px;
+
+		& img {
+			height: 40px;
+		}
+	}
+}
+
+.logo {
+	display: block;
+	margin: auto;
+}
