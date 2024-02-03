@@ -5,9 +5,11 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ApiService } from '../../services/api.service';
-import { DeliveryPoint, PackageType } from '../../utils/types';
+import { DeliveryCalculationRequest, DeliveryPoint, PackageType } from '../../utils/types';
 import { Subscription } from 'rxjs';
 import { CommonModule } from '@angular/common';
+import { Router } from '@angular/router';
+import { DeliveryService } from '../../services/delivery.service';
 
 @Component({
   selector: 'app-delivery-form',
@@ -36,7 +38,12 @@ export class DeliveryFormComponent implements OnInit, OnDestroy {
 
   private _subscriptions: Array<Subscription> = [];
 
-  constructor(private _apiService: ApiService) {
+  constructor(
+    private _apiService: ApiService,
+    private _deliveryService: DeliveryService,
+    private _router: Router
+  ) {
+
     this.form = new FormGroup({
       senderPoint: new FormControl(null, Validators.required),
       receiverPoint: new FormControl(null, Validators.required),
@@ -61,7 +68,18 @@ export class DeliveryFormComponent implements OnInit, OnDestroy {
   }
 
   submit() {
-    console.log(this.form.value);
+
+    const calculationRequest: DeliveryCalculationRequest = {
+      package: this.form.value.packageType,
+      senderPoint: this.form.value.senderPoint,
+      receiverPoint: this.form.value.receiverPoint
+    }
+
+    this._apiService.calculatePrice(calculationRequest).subscribe(res => {
+      if (res.success) this._deliveryService.deliveryOptions.next(res.options);
+    });
+
+    this._router.navigate(['/delivery-type']);
   }
 
   change(value: DeliveryPoint, control: string): void {
@@ -74,7 +92,7 @@ export class DeliveryFormComponent implements OnInit, OnDestroy {
     }
   }
 
-  ngOnDestroy() {
-    this._subscriptions.forEach(sub => sub.unsubscribe);
+  ngOnDestroy(): void {
+    this._subscriptions.forEach(sub => sub.unsubscribe());
   }
 }
