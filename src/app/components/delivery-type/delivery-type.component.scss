@@ -3,7 +3,7 @@
 	flex-flow: row wrap;
 	justify-content: center;
 	align-items: center;
-	row-gap: 20px;
+	row-gap: 30px;
 	column-gap: 50px;
 
 	& h2 {
@@ -13,16 +13,30 @@
 	}
 
 	& .option {
+		position: relative;
+		top: 0;
+		left: 0;
 		width: 80%;
 		max-width: 370px;
 		height: 150px;
 		display: flex;
-		justify-content: space-between;
+		justify-content: space-around;
 		align-items: center;
 		gap: 20px;
 		padding: 20px 25px;
 		border-radius: 20px;
 		background-color: #fff;
+		transition: all 1s;
+	}
+
+	& .option:hover {
+		top: -10px;
+		left: -5px;
+		transition: all 1s;
+
+		& h2 {
+			color: #1975FF;
+		}
 	}
 }
 
