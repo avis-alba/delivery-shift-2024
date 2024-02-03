@@ -12,12 +12,10 @@
 			<mat-icon>place</mat-icon>
 			Город отправки
 		</mat-label>
-		<mat-select>
-			<mat-option value="Москва">Москва</mat-option>
-			<mat-option value="Новосибирск">Новосибирск</mat-option>
-			<mat-option value="Иркутск">Иркутск</mat-option>
-			<mat-option value="Пенза">Пенза</mat-option>
+		<mat-select matInput>
+			<mat-option *ngFor="let point of deliveryPoints" [value]="point.id">{{ point.name }}</mat-option>
 		</mat-select>
+		<mat-hint>Hint</mat-hint>
 	</mat-form-field>
 
 	<mat-form-field appearance="outline">
@@ -25,12 +23,10 @@
 			<mat-icon>near_me</mat-icon>
 			Город назначения
 		</mat-label>
-		<mat-select>
-			<mat-option value="Москва">Москва</mat-option>
-			<mat-option value="Новосибирск">Новосибирск</mat-option>
-			<mat-option value="Иркутск">Иркутск</mat-option>
-			<mat-option value="Пенза">Пенза</mat-option>
+		<mat-select matInput>
+			<mat-option *ngFor="let point of deliveryPoints" [value]="point">{{ point.name }}</mat-option>
 		</mat-select>
+		<mat-hint>Hint</mat-hint>
 	</mat-form-field>
 
 	<mat-form-field appearance="outline">
@@ -39,9 +35,9 @@
 			Размер посылки
 		</mat-label>
 		<mat-select>
-			<mat-option value="Конверт">Конверт</mat-option>
-			<mat-option value="Посылка">Посылка</mat-option>
+			<mat-option *ngFor="let package of packageTypes" [value]="package">{{ package.name }}</mat-option>
 		</mat-select>
+		<mat-hint>Hint</mat-hint>
 	</mat-form-field>
 
 	<button type="submit" mat-raised-button>Рассчитать</button>
