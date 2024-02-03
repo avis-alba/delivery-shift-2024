@@ -30,6 +30,8 @@ export interface DeliveryOption {
 	days: number;
 	name: string;
 	type: string;
+	url?: string;
+	header?: string;
 }
 
 export interface DeliveryCalculationRequest {

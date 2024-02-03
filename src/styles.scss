@@ -117,6 +117,10 @@ app-root {
 	justify-content: space-between;
 }
 
+router-outlet {
+	display: none;
+}
+
 .copywright {
 	margin: 0px auto 10px;
 	text-align: center;
