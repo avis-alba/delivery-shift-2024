@@ -12,12 +12,11 @@
 			<mat-icon>place</mat-icon>
 			Город отправки
 		</mat-label>
-		<mat-select>
-			<mat-option value="Москва">Москва</mat-option>
-			<mat-option value="Новосибирск">Новосибирск</mat-option>
-			<mat-option value="Иркутск">Иркутск</mat-option>
-			<mat-option value="Пенза">Пенза</mat-option>
+		<mat-select matInput formControlName="senderPoint" (selectionChange)="change(senderPoint.value, 'sender')"
+			#senderPoint>
+			<mat-option *ngFor="let point of deliveryPointsSender" [value]="point">{{ point.name }}</mat-option>
 		</mat-select>
+		<mat-error>Выберите город</mat-error>
 	</mat-form-field>
 
 	<mat-form-field appearance="outline">
@@ -25,12 +24,11 @@
 			<mat-icon>near_me</mat-icon>
 			Город назначения
 		</mat-label>
-		<mat-select>
-			<mat-option value="Москва">Москва</mat-option>
-			<mat-option value="Новосибирск">Новосибирск</mat-option>
-			<mat-option value="Иркутск">Иркутск</mat-option>
-			<mat-option value="Пенза">Пенза</mat-option>
+		<mat-select matInput formControlName="receiverPoint" (selectionChange)="change(receiverPoint.value, 'receiver')"
+			#receiverPoint>
+			<mat-option *ngFor="let point of deliveryPointsReceiver" [value]="point">{{ point.name }}</mat-option>
 		</mat-select>
+		<mat-error>Выберите город</mat-error>
 	</mat-form-field>
 
 	<mat-form-field appearance="outline">
@@ -38,11 +36,11 @@
 			<mat-icon>mail</mat-icon>
 			Размер посылки
 		</mat-label>
-		<mat-select>
-			<mat-option value="Конверт">Конверт</mat-option>
-			<mat-option value="Посылка">Посылка</mat-option>
+		<mat-select matInput formControlName="packageType">
+			<mat-option *ngFor="let package of packageTypes" [value]="package">{{ package.name }}</mat-option>
 		</mat-select>
+		<mat-error>Выберите тип посылки</mat-error>
 	</mat-form-field>
 
-	<button type="submit" mat-raised-button>Рассчитать</button>
+	<button type="submit" mat-raised-button [disabled]="form.invalid">Рассчитать</button>
 </form>
