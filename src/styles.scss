@@ -44,15 +44,25 @@ form {
 	& button[mat-raised-button] {
 		width: 150px;
 		height: 50px;
-		margin: 10px auto 0px;
+		margin: 5px auto 0px;
 		border-radius: 25px;
 		font-size: 16px;
 		background-color: #1975FF !important;
 		color: #fff !important;
 	}
 
+	& button[mat-raised-button]:disabled {
+		background-color: #cfe2ff !important;
+		color: #1975FF !important;
+	}
+
 	& mat-form-field {
 		width: 100%;
+		margin-bottom: 10px;
+	}
+
+	.mat-mdc-form-field {
+		font-family: "Montserrat";
 	}
 }
 
@@ -105,6 +115,10 @@ app-root {
 	display: flex;
 	flex-direction: column;
 	justify-content: space-between;
+}
+
+router-outlet {
+	display: none;
 }
 
 .copywright {

@@ -1,0 +1,12 @@
+<div class="options-container">
+
+	<div *ngFor="let option of deliveryOptions" class="option">
+		<img [src]="option.url" alt="delivery-icon">
+		<div class="option-description">
+			<h2>{{ option.header }}</h2>
+			<p><strong>Цена</strong>: {{ option.price }} ₽</p>
+			<p><strong>Скорость доставки</strong>: {{ option.days }} {{setDaysLine(option.days)}}</p>
+		</div>
+	</div>
+
+</div>
